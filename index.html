@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeedLead | AI Operating System for Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --bg-color: #030712; /* Deep space dark */
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --primary: #3b82f6;
+            --accent: #8b5cf6;
+            --gradient-text: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            --glass-bg: rgba(17, 24, 39, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            /* Subtle mesh gradient background */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 25%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-text);
+            border-radius: 6px;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 99px;
+            font-weight: 500;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 180px 5% 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .announcement-badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            max-width: 900px;
+        }
+
+        .text-gradient {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2vw, 22px);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Value Prop Card */
+        .description-container {
+            padding: 0 5% 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card h2 {
+            font-size: 32px;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .glass-card p {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Waitlist Section */
+        .waitlist-section {
+            padding: 60px 5% 120px;
+            text-align: center;
+        }
+
+        .waitlist-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .waitlist-container h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .waitlist-container p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 12px;
+            position: relative;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .waitlist-form input::placeholder {
+            color: #6b7280;
+        }
+
+        .waitlist-form input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .waitlist-form button {
+            background: var(--text-main);
+            color: var(--bg-color);
+            border: none;
+            padding: 0 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .waitlist-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .waitlist-form {
+                flex-direction: column;
+            }
+            .waitlist-form input, .waitlist-form button {
+                width: 100%;
+                padding: 16px;
+                box-sizing: border-box;
+            }
+            .glass-card {
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon"></div>
+            SpeedLead
+        </a>
+        <a href="mailto:Askusaiconsulting@gmail.com" class="contact-btn">Contact Founders</a>
+    </header>
+
+    <section class="hero">
+        <div class="announcement-badge">
+            ✨ Operating in Stealth
+        </div>
+        <h1>The AI Operating System for <span class="text-gradient">Real Estate</span></h1>
+        <p>Run your entire team on autopilot. Handle follow-ups, scheduling, and agent tracking so you can focus on closing more deals.</p>
+    </section>
+
+    <section class="description-container">
+        <div class="glass-card">
+            <h2>Scale Without the Headcount</h2>
+            <p>We build AI-powered systems specifically for real estate brokers to automate operations, increase agent productivity, and drive more closed deals. SpeedLead acts as a central AI assistant layer across your brokerage, seamlessly handling the repetitive admin tasks that normally consume hours of your day and slow down deal flow.</p>
+        </div>
+    </section>
+
+    <section class="waitlist-section">
+        <div class="waitlist-container">
+            <h3>Join the Waitlist</h3>
+            <p>We are onboarding a limited number of brokerages. Request early access.</p>
+            <form class="waitlist-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for joining the SpeedLead waitlist!');">
+                <input type="email" placeholder="name@brokerage.com" required>
+                <button type="submit">Get Access</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 SpeedLead. All rights reserved.
+    </footer>
+
+</body>
+</html>
