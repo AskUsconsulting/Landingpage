@@ -3,302 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeedLead | AI Operating System for Real Estate</title>
+    <title>SpeadLead | AI Assistant for Real Estate</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles & Variables */
         :root {
-            --bg-color: #030712; /* Deep space dark */
+            --bg-dark: #030712;
+            --bg-card: rgba(17, 24, 39, 0.6);
             --text-main: #f9fafb;
             --text-muted: #9ca3af;
             --primary: #3b82f6;
+            --primary-hover: #2563eb;
             --accent: #8b5cf6;
-            --gradient-text: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            --glass-bg: rgba(17, 24, 39, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            background-color: var(--bg-color);
-            /* Subtle mesh gradient background */
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 25%);
-            background-attachment: fixed;
             line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: 'Outfit', sans-serif;
-            margin: 0;
-        }
-
-        /* Glassmorphism Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 5%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: #ffffff;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--gradient-text);
-            border-radius: 6px;
-        }
-
-        .contact-btn {
-            background: transparent;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 99px;
-            font-weight: 500;
-            font-size: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 180px 5% 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .announcement-badge {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 24px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero h1 {
-            font-size: clamp(40px, 6vw, 72px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            max-width: 900px;
         }
 
         .text-gradient {
-            background: var(--gradient-text);
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero p {
-            font-size: clamp(18px, 2vw, 22px);
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Value Prop Card */
-        .description-container {
-            padding: 0 5% 80px;
+        /* --- Nav --- */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 50;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .glass-card {
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 48px;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .glass-card h2 {
-            font-size: 32px;
-            color: #ffffff;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .glass-card p {
-            font-size: 18px;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        /* Waitlist Section */
-        .waitlist-section {
-            padding: 60px 5% 120px;
-            text-align: center;
-        }
-
-        .waitlist-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .waitlist-container h3 {
-            font-size: 28px;
-            margin-bottom: 12px;
-        }
-
-        .waitlist-container p {
-            color: var(--text-muted);
-            margin-bottom: 32px;
-        }
-
-        .waitlist-form {
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
             display: flex;
-            gap: 12px;
-            position: relative;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .waitlist-form input {
-            flex: 1;
-            background: rgba(17, 24, 39, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: all 0.3s ease;
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient);
+            border-radius: 6px;
         }
 
-        .waitlist-form input::placeholder {
-            color: #6b7280;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
 
-        .waitlist-form input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
         }
 
-        .waitlist-form button {
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .btn-primary {
             background: var(--text-main);
-            color: var(--bg-color);
-            border: none;
-            padding: 0 32px;
-            border-radius: 12px;
-            font-size: 16px;
+            color: var(--bg-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 99px;
+            text-decoration: none;
             font-weight: 600;
+            transition: var(--transition);
+            border: none;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .waitlist-form button:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.2);
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--glass-border);
-            color: #4b5563;
-            font-size: 14px;
+        /* --- Sections --- */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            .waitlist-form {
+        /* --- Hero --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 8rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- Problems --- */
+        .problems {
+            text-align: center;
+            margin-top: -4rem;
+        }
+
+        .problems h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .problem-card:hover {
+            border-color: rgba(96, 165, 250, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .problem-card h3 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Features --- */
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .feature-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .feature-row:nth-child(even) .feature-content {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-visual {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.8));
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- Team --- */
+        .team {
+            text-align: center;
+            background: rgba(17, 24, 39, 0.3);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 4rem 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .team h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .team-member h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .team-member p {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* --- CTA --- */
+        .cta {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(to top, rgba(59, 130, 246, 0.05), transparent);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .cta-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+
+        .cta-form input:focus {
+            border-color: var(--primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 2rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Animations --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .feature-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                direction: ltr !important;
+            }
+            .nav-links {
+                display: none;
+            }
+            .cta-form {
                 flex-direction: column;
-            }
-            .waitlist-form input, .waitlist-form button {
-                width: 100%;
-                padding: 16px;
-                box-sizing: border-box;
-            }
-            .glass-card {
-                padding: 32px 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <nav>
         <a href="#" class="logo">
             <div class="logo-icon"></div>
-            SpeedLead
+            SpeadLead
         </a>
-        <a href="mailto:Askusaiconsulting@gmail.com" class="contact-btn">Contact Founders</a>
-    </header>
-
-    <section class="hero">
-        <div class="announcement-badge">
-            ✨ Operating in Stealth
+        <div class="nav-links">
+            <a href="#problems">The Problem</a>
+            <a href="#features">Platform</a>
+            <a href="#team">Team</a>
         </div>
-        <h1>The AI Operating System for <span class="text-gradient">Real Estate</span></h1>
-        <p>Run your entire team on autopilot. Handle follow-ups, scheduling, and agent tracking so you can focus on closing more deals.</p>
-    </section>
+        <a href="#waitlist" class="btn-primary">Join Waitlist</a>
+    </nav>
 
-    <section class="description-container">
-        <div class="glass-card">
-            <h2>Scale Without the Headcount</h2>
-            <p>We build AI-powered systems specifically for real estate brokers to automate operations, increase agent productivity, and drive more closed deals. SpeedLead acts as a central AI assistant layer across your brokerage, seamlessly handling the repetitive admin tasks that normally consume hours of your day and slow down deal flow.</p>
+    <section class="hero fade-in">
+        <h1>Close More Deals. <br><span class="text-gradient">Do Less Manual Work.</span></h1>
+        <p>Your AI assistant for real estate. We automate your follow-ups, pipeline, and listings so you can focus entirely on your clients.</p>
+        <div class="cta-form">
+            <a href="#waitlist" class="btn-primary" style="width: 100%; text-align: center; padding: 1rem;">Get Early Access</a>
         </div>
     </section>
 
-    <section class="waitlist-section">
-        <div class="waitlist-container">
-            <h3>Join the Waitlist</h3>
-            <p>We are onboarding a limited number of brokerages. Request early access.</p>
-            <form class="waitlist-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for joining the SpeedLead waitlist!');">
-                <input type="email" placeholder="name@brokerage.com" required>
-                <button type="submit">Get Access</button>
-            </form>
+    <section id="problems" class="problems fade-in">
+        <h2>The Real Estate Trap</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>Lost Leads</h3>
+                <p>Agents waste hours attempting follow-ups. If you don't reply within 5 minutes, conversion drops by 80%.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Admin Overload</h3>
+                <p>Writing listings, scheduling posts, and endless text/email chains drain energy away from closing.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Messy Pipelines</h3>
+                <p>Manual CRM updates are constantly forgotten, leaving brokers blind to actual team performance.</p>
+            </div>
         </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2>Everything you need, on autopilot.</h2>
+
+        <div class="feature-row fade-in">
+            <div class="feature-content">
+                <h3 class="text-gradient">AI Lead Follow-Up Agent</h3>
+                <p>Never let a Zillow or Realtor.com lead go cold again. SpeadLead instantly texts and emails new inquiries the second they arrive, answering property questions and nurturing them over time until they are ready to buy.</p>
+                <ul>
+                    <li style="color: var(--text-muted); margin-bottom: 0.5rem;">✓ Instant text & email response</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.5rem;">✓ Long-term drip nurturing</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.5rem;">✓ Context-aware conversation</li>
+                </ul>
+            </div>
+            <div class="feature-visual">
+                <p style="color: var(--text-muted);">Interactive Chat UI Preview</p>
+            </div>
+        </div>
+
+        <div class="feature-row fade-in">
+            <div class="feature-content">
+                <h3 class="text-gradient">AI Listing Generator</h3>
+                <p>Stop staring at a blank page. Input basic property details, and our engine instantly generates high-converting MLS descriptions, targeted Facebook ads, and engaging social media posts tailored to your specific market.</p>
+            </div>
+            <div class="feature-visual">
+                <p style="color: var(--text-muted);">Marketing Asset Dashboard</p>
+            </div>
+        </div>
+
+        <div class="feature-row fade-in">
+            <div class="feature-content">
+                <h3 class="text-gradient">AI CRM Assistant & Pipeline</h3>
+                <p>A CRM that updates itself. SpeadLead tracks your conversations and automatically updates lead statuses. It proactively reminds agents exactly who to call today, eliminating pipeline guesswork.</p>
+            </div>
+            <div class="feature-visual">
+                <p style="color: var(--text-muted);">Automated Pipeline View</p>
+            </div>
+        </div>
+
+        <div class="feature-row fade-in">
+            <div class="feature-content">
+                <h3 class="text-gradient">AI Appointment Setter</h3>
+                <p>Remove the back-and-forth of scheduling. Our AI coordinates with leads and automatically books property showings and discovery calls directly onto your calendar.</p>
+            </div>
+            <div class="feature-visual">
+                <p style="color: var(--text-muted);">Calendar Integration UI</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="team fade-in">
+        <h2>Built for the Future of Real Estate</h2>
+        <p style="color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Engineered from the ground up by a specialized team blending deep expertise in automation, robust systems architecture, and AI-driven growth.
+        </p>
+        <div class="team-grid">
+            <div class="team-member">
+                <h4>Dagem Kebede</h4>
+                <p>CEO</p>
+            </div>
+            <div class="team-member">
+                <h4>Abiel M. Berhanu</h4>
+                <p>CTO</p>
+            </div>
+            <div class="team-member">
+                <h4>Steven Di Jorio</h4>
+                <p>CIO</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="waitlist" class="cta fade-in">
+        <h2>Ready to scale your brokerage?</h2>
+        <p style="color: var(--text-muted);">Join the waitlist. We are onboarding early partners now.</p>
+        <form class="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input type="email" name="email" placeholder="name@brokerage.com" required>
+            <button type="submit" class="btn-primary">Request Access</button>
+        </form>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">Questions? Contact us at <a href="mailto:askus@gmail.com" style="color: var(--primary); text-decoration: none;">askus@gmail.com</a></p>
     </section>
 
     <footer>
-        &copy; 2026 SpeedLead. All rights reserved.
+        &copy; 2026 SpeadLead. Built to accelerate real estate.
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
